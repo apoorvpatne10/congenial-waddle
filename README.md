@@ -7,6 +7,7 @@
 ## Create a virtual environment and activate it 
 
 `virtualenv <environment name>`
+
 `source <environment name>/bin/activate`
 
 ## Install the requirements
