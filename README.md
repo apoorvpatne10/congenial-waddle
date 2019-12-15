@@ -18,9 +18,10 @@
 
 `python manage.py migrate`
 
-## Fire up the local server
+## Fire up the local server and go to http://localhost:8000/files/
 
 `python manage.py runserver`
+
 
 #### I. Create a model having fields of type CharField and FileField. Implement a system on top of this model which should notify the updated/created field only and its old and new value. (it shouldn’t notify about the field which is not updated). It should also notify in case content of FileField is changed. [You may use signals or any other mechanism of your choice.] 
 
