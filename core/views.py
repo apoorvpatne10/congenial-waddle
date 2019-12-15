@@ -5,10 +5,11 @@ from django.contrib import messages
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework import status
 from .forms import MyModelForm, MyModelUpdateForm
 from .models import MyModel
-from .serializers import FileSerializer
+from .serializers import FileSerializer, CRUDSerializer
 import os
 
 
@@ -78,6 +79,11 @@ def delete_file(request, pk):
         file = MyModel.objects.get(pk=pk)
         file.delete()
     return redirect('file_list')
+
+
+class UpdateStuff(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MyModel.objects.all()
+    serializer_class = CRUDSerializer
 
 
 class FileUploadView(APIView):
