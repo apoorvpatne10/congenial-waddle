@@ -4,6 +4,7 @@ from django.views.generic import ListView, TemplateView, UpdateView
 from django.contrib import messages
 from .forms import MyModelForm, MyModelUpdateForm
 from .models import MyModel
+import os
 
 
 def home(request):
@@ -33,13 +34,16 @@ def upload_file(request):
     if request.method == 'POST':
         form = MyModelForm(request.POST, request.FILES)
         if form.is_valid():
+            my_file_name = form.cleaned_data['my_file']
             form.save()
             return redirect('file_list')
+
     else:
         form = MyModelForm()
     context = {
         'form': form
     }
+
     return render(request, 'core/upload_file.html', context)
 
 
