@@ -2,8 +2,13 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.views.generic import ListView, TemplateView, UpdateView
 from django.contrib import messages
+from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 from .forms import MyModelForm, MyModelUpdateForm
 from .models import MyModel
+from .serializers import FileSerializer
 import os
 
 
@@ -68,7 +73,6 @@ def update_file(request, pk):
     return render(request, 'core/update.html', context)
 
 
-
 def delete_file(request, pk):
     if request.method == 'POST':
         file = MyModel.objects.get(pk=pk)
@@ -76,15 +80,14 @@ def delete_file(request, pk):
     return redirect('file_list')
 
 
-# class UpdateFile(UpdateView):
-#     model = MyModel
-#     fields = ('file_name', 'my_file')
-#     template_name = 'core/upload_file.html'
-#
-#     def form_valid(self, form):
-#         return super().form_valid(form)
+class FileUploadView(APIView):
+    parser_class = (FileUploadParser,)
 
-# class FileListView(ListView):
-#     model = MyModel
-#     template_name = "core/file_list.html"
-#     context_object_name = 'files'
+    def post(self, request, *args, **kwargs):
+        file_serializer = FileSerializer(data=request.data)
+
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
