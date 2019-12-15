@@ -4,6 +4,11 @@
 
 `gir clone https://github.com/apoorvpatne10/congenial-waddle/`
 
+## Create a virtual environment and activate it 
+
+`virtualenv <environment name>`
+`source <environment name>/bin/activate`
+
 ## Install the requirements
 
 `pip install -r requirements.txt`
