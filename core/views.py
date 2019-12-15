@@ -44,14 +44,20 @@ def upload_file(request):
 
 
 def update_file(request, pk):
-    data = MyModel.objects.get(pk=pk)
+    instance = MyModel.objects.get(pk=pk)
     if request.method == 'POST':
-        form = MyModelUpdateForm(request.POST, request.FILES, instance=data)
+        prev_file_name = instance.tracker.previous('file_name')
+        prev_file = instance.tracker.previous('my_file')
+        form = MyModelUpdateForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
+            if prev_file_name != instance.file_name:
+                messages.info(request, f"File name changed. Old value : {prev_file_name}, New value: {instance.file_name}")
+            if prev_file != instance.my_file:
+                messages.info(request, f"File content changed. Old value : {prev_file}, New value: {instance.my_file}")
             return redirect('file_list')
     else:
-        form = MyModelUpdateForm(instance=data)
+        form = MyModelUpdateForm(instance=instance)
     context = {
         'form': form
     }
