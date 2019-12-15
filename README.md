@@ -47,10 +47,10 @@
 
 ![img](https://i.imgur.com/uPV0T7p.png)
 
-#### 5. Making a simple POST request to REST API using Postman 
+#### 5. Creating a new instance by making a simple POST request to REST API using Postman 
 
 ![img](https://i.imgur.com/lEhBx7g.png)
 
-#### 6. Simple CRUD API view for reading/updating/deleting 
+#### 6. Simple CRUD API view for reading/updating/deleting for the created instance above (id=35) at http://localhost:8000/update_rest/35/
 
 ![img](https://i.imgur.com/i2jshTe.png)
