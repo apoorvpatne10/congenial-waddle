@@ -51,4 +51,6 @@
 
 ![img](https://i.imgur.com/lEhBx7g.png)
 
+#### 6. Simple CRUD API view for reading/updating/deleting 
 
+![img](https://i.imgur.com/i2jshTe.png)
