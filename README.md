@@ -47,3 +47,8 @@
 
 ![img](https://i.imgur.com/uPV0T7p.png)
 
+#### 5. Making a simple POST request to REST API using Postman 
+
+![img](https://i.imgur.com/lEhBx7g.png)
+
+
